@@ -1,8 +1,8 @@
-import { Interaction } from "discord.js";
+import { ClientEvents, Interaction } from "discord.js";
 import { Astolfo } from "./Client";
 
 export interface Event {
-  name: string;
+  name: keyof ClientEvents;
   execute: (
     client: Astolfo,
     interaction: Interaction
