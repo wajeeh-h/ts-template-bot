@@ -5,17 +5,21 @@ import {
 } from "discord.js";
 import { readdirSync } from "fs";
 import path from "path";
-import { PARTIALS, INTENTS, TEST_ID, TOKEN } from "../Const";
-import { CommandType } from "./Command";
+import { PARTIALS, INTENTS, TEST_ID, TOKEN } from "../const";
+import { Command } from "./ICommand";
 
 export class Astolfo extends Client {
-  slashCommands: Collection<string, CommandType> = new Collection();
+  slashCommands: Collection<string, Command> = new Collection();
   constructor() {
     super({ intents: INTENTS, partials: PARTIALS });
   }
 
   init() {
     this.loadEvents();
+    if (!TOKEN) {
+      console.log("[ERROR] Token Not Defned"); 
+      process.exit(1);
+    }
     this.login(TOKEN)
       .then(() => console.log("[Astolfo] Logged In..."))
       .catch((error) => console.error(error));
@@ -27,14 +31,18 @@ export class Astolfo extends Client {
       (file) => file.endsWith(".ts")
     );
     files.forEach(async (file) => {
-      const command: CommandType = await import(
+      const command: Command = await import(
         path.join(__dirname, "..", "commands", `${file}`)
       );
-      this.slashCommands.set(command.name, command);
-      commands.push(command);
+      this.slashCommands.set(command.args.name, command);
+      commands.push(command.args);
     });
-    // this.application?.commands.set(commands);
-    this.guilds.cache.get(TEST_ID)?.commands.set(commands);
+    if (TEST_ID){
+      this.guilds.cache.get(TEST_ID)?.commands.set(commands);
+    }
+    else {
+      this.application?.commands.set(commands);
+    }
   }
 
   async loadEvents() {

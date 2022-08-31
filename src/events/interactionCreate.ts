@@ -2,7 +2,7 @@ import { Interaction } from "discord.js";
 import { Astolfo } from "../structs/Client";
 import { Event } from "../structs/IEvent";
 
-const InteractionCreateEvent: Event = {
+export const InteractionCreateEvent: Event = {
   name: "interactionCreate",
   execute: async (client: Astolfo, interaction: Interaction) => {
     if (!interaction.isCommand()) {
@@ -13,4 +13,3 @@ const InteractionCreateEvent: Event = {
   },
 };
 
-export = InteractionCreateEvent;

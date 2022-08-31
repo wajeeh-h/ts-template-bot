@@ -1,10 +1,15 @@
-import { Command } from "../structs/Command";
+import { ApplicationCommandOptionData, Interaction } from "discord.js";
+import { Astolfo } from "src/structs/Client";
+import { Command } from "../structs/ICommand";
 
-const ping = new Command({
-  name: "ping",
-  description: "pong!",
-  execute(client, interaction) {
-    interaction.reply("Pong!");
+const Ping: Command = {
+  args: {
+    name: "ping",
+    description: "pong!",
   },
-})
-export = ping;
+  execute: (client: Astolfo, interaction: Interaction) => {
+    if (interaction.isChatInputCommand()) {
+      interaction.reply("pong!");
+    }
+  }
+}

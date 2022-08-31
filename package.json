@@ -22,9 +22,5 @@
         ]
       }
     }
-  ],
-  "dependencies": {
-    "glob": "^8.0.3",
-    "glob-promise": "^5.0.0"
-  }
+  ]
 }
