@@ -7,6 +7,7 @@ import { readdirSync } from "fs";
 import path from "path";
 import { PARTIALS, INTENTS, TEST_ID, TOKEN } from "../const";
 import { Command } from "./ICommand";
+import { Event } from "./IEvent";
 
 export class Astolfo extends Client {
   slashCommands: Collection<string, Command> = new Collection();
@@ -50,12 +51,12 @@ export class Astolfo extends Client {
       (file) => file.endsWith(".ts")
     );
     files.forEach(async (file) => {
-      const event = await import(
+      const event: Event = await import(
         path.join(__dirname, "..", "events", `${file}`)
       );
-      this.on(event.name, (interaction) => {
+      this.on(event.name.toString(), (interaction) => {
         event.execute(this, interaction);
-      });
+      })
     });
   }
 }
