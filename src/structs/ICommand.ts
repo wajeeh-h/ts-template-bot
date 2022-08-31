@@ -1,4 +1,4 @@
-import { ChatInputApplicationCommandData, ClientEvents, Interaction } from "discord.js";
+import { ChatInputApplicationCommandData, Interaction } from "discord.js";
 import { Astolfo } from "./Client";
 
 export interface Command {

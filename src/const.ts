@@ -7,7 +7,6 @@ import {
 import dotenv from "dotenv";
 
 dotenv.config();
-
 // Read environment variables
 const TEST_ID = process.env.TEST_ID;
 const ID_ONE = process.env.ID_ONE;

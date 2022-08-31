@@ -1,10 +1,10 @@
 import { ClientEvents, Interaction } from "discord.js";
 import { Astolfo } from "./Client";
 
-export interface Event {
-  name: keyof ClientEvents;
+export interface Event<Key extends keyof ClientEvents> {
+  name: Key,
   execute: (
     client: Astolfo,
-    interaction: Interaction
+    args: any
   ) => Promise<unknown | void> | unknown | void;
 }

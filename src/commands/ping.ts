@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionData, Interaction } from "discord.js";
+import { Interaction } from "discord.js";
 import { Astolfo } from "src/structs/Client";
 import { Command } from "../structs/ICommand";
 
@@ -13,3 +13,5 @@ const Ping: Command = {
     }
   }
 }
+
+export = Ping;

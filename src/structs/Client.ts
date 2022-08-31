@@ -1,13 +1,14 @@
 import {
   ApplicationCommandDataResolvable,
   Client,
+  ClientEvents,
   Collection,
 } from "discord.js";
 import { readdirSync } from "fs";
 import path from "path";
 import { PARTIALS, INTENTS, TEST_ID, TOKEN } from "../const";
 import { Command } from "./ICommand";
-import { Event } from "./IEvent";
+import { Event} from "./IEvent";
 
 export class Astolfo extends Client {
   slashCommands: Collection<string, Command> = new Collection();
@@ -18,7 +19,7 @@ export class Astolfo extends Client {
   init() {
     this.loadEvents();
     if (!TOKEN) {
-      console.log("[ERROR] Token Not Defned"); 
+      console.log("[ERROR] Token Not Defned");
       process.exit(1);
     }
     this.login(TOKEN)
@@ -38,10 +39,9 @@ export class Astolfo extends Client {
       this.slashCommands.set(command.args.name, command);
       commands.push(command.args);
     });
-    if (TEST_ID){
+    if (TEST_ID) {
       this.guilds.cache.get(TEST_ID)?.commands.set(commands);
-    }
-    else {
+    } else {
       this.application?.commands.set(commands);
     }
   }
@@ -51,12 +51,12 @@ export class Astolfo extends Client {
       (file) => file.endsWith(".ts")
     );
     files.forEach(async (file) => {
-      const event: Event = await import(
+      const event = await import(
         path.join(__dirname, "..", "events", `${file}`)
       );
-      this.on(event.name.toString(), (interaction) => {
-        event.execute(this, interaction);
-      })
+      this.on(event.name, (args) => {
+        event.execute(this, args);
+      });
     });
   }
 }

@@ -1,11 +1,12 @@
 import { STATUS } from "../const";
-import { Astolfo } from "../structs/Client";
 import { Event } from "../structs/IEvent";
 
-export const ReadyEvent: Event = {
+const ReadyEvent: Event<"ready"> = {
   name: "ready",
-  execute: (client: Astolfo) => {
+  execute: (client, interaction) => {
     client.loadCommands();
     client.user?.setActivity(STATUS);
   },
 };
+
+export = ReadyEvent;
