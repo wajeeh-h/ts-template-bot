@@ -1,10 +1,10 @@
-import { ChatInputApplicationCommandData, Interaction } from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { Astolfo } from "./Client";
 
 export interface Command {
-  args: ChatInputApplicationCommandData;
+  args: SlashCommandBuilder;
   execute: (
     client: Astolfo,
-    interaction: Interaction
+    interaction: ChatInputCommandInteraction
   ) => Promise<unknown | void> | unknown | void;
 }

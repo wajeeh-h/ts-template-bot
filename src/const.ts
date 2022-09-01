@@ -8,20 +8,20 @@ import dotenv from "dotenv";
 
 dotenv.config();
 // Read environment variables
-const TEST_ID = process.env.TEST_ID;
-const ID_ONE = process.env.ID_ONE;
-const ID_TWO = process.env.ID_TWO;
-const CLIENT_ID = process.env.CLIENT_ID;
-const TOKEN = process.env.TOKEN;
-const PREFIX = process.env.PREFIX;
+export const TEST_ID = process.env.TEST_ID;
+export const ID_ONE = process.env.ID_ONE;
+export const ID_TWO = process.env.ID_TWO;
+export const CLIENT_ID = process.env.CLIENT_ID;
+export const TOKEN = process.env.TOKEN;
+export const PREFIX = process.env.PREFIX;
 
-const STATUS: ActivityOptions = {
+export const STATUS: ActivityOptions = {
   name: "Only Fans...",
   type: ActivityType.Streaming,
   url: "https://www.twitch.tv/wageethewitch",
 };
 
-const INTENTS: GatewayIntentBits[] = [
+export const INTENTS: GatewayIntentBits[] = [
   GatewayIntentBits.Guilds,
   GatewayIntentBits.GuildMembers,
   GatewayIntentBits.GuildBans,
@@ -40,7 +40,7 @@ const INTENTS: GatewayIntentBits[] = [
   GatewayIntentBits.GuildScheduledEvents,
 ];
 
-const PARTIALS: Partials[] = [
+export const PARTIALS: Partials[] = [
   Partials.User,
   Partials.Channel,
   Partials.GuildMember,
@@ -49,15 +49,3 @@ const PARTIALS: Partials[] = [
   Partials.GuildScheduledEvent,
   Partials.ThreadMember,
 ];
-
-export {
-  TEST_ID,
-  ID_ONE,
-  ID_TWO,
-  CLIENT_ID,
-  TOKEN,
-	STATUS,
-  PREFIX,
-  PARTIALS,
-  INTENTS,
-}

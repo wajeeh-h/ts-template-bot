@@ -3,9 +3,9 @@ import { Event } from "../structs/IEvent";
 
 const ReadyEvent: Event<"ready"> = {
   name: "ready",
-  execute: (client, interaction) => {
-    client.loadCommands();
+  execute: async (client, []) => {
     client.user?.setActivity(STATUS);
+    await client.loadCommands();
   },
 };
 
